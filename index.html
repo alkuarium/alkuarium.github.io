@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Rafi’ Al Khawarizmi — Backend Developer</title>
+<title>Rafi’ Al Khawarizmi — Full Stack Developer</title>
 <meta name="color-scheme" content="dark">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <style>
@@ -29,20 +29,47 @@ body{background:#0a0c10;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe
 .blob{position:fixed;z-index:-1;border-radius:9999px;filter:blur(90px);pointer-events:none}
 .b1{width:340px;height:340px;background:rgba(225,29,72,.16);top:5%;right:-80px;animation:drift1 16s ease-in-out infinite}
 .b2{width:380px;height:380px;background:rgba(59,130,246,.14);bottom:5%;left:-100px;animation:drift2 20s ease-in-out infinite}
-.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
-.js .reveal.in{opacity:1;transform:none}
+html{overflow-x:hidden}body{overflow-x:clip}
+.js .reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:0s;will-change:opacity,transform}
+.js .reveal.from-l{transform:translateX(-32px)}.js .reveal.from-r{transform:translateX(32px)}.js .reveal.zoom{transform:scale(.88) translateY(20px)}
+.js .reveal.in{opacity:1;transform:none;transition-delay:var(--d,0s)}
+.js .reveal.in:hover{transition-delay:0s}
+.js article.reveal.in:hover{transform:translateY(-4px)}
+a:active{opacity:.85}
 #progress{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,#e11d48,#3b82f6);z-index:50}
 article img{transition:transform .5s ease}article:hover img{transform:scale(1.04)}
 article{transition:transform .3s ease,border-color .3s ease}article:hover{transform:translateY(-4px);border-color:rgba(59,130,246,.5)}
 a[class*="rounded-lg"]{transition:transform .2s ease,background-color .2s,border-color .2s}a[class*="rounded-lg"]:hover{transform:translateY(-2px)}
 .chip{transition:transform .2s ease,border-color .2s,color .2s}.chip:hover{transform:translateY(-3px) scale(1.05);border-color:#f43f5e;color:#fff}
+@keyframes fwdback{0%,100%{transform:perspective(320px) translateY(-3px) translateZ(0) scale(1)}50%{transform:perspective(320px) translateY(-6px) translateZ(46px) scale(1.06)}}
+.chip:hover{animation:fwdback .9s ease-in-out infinite;box-shadow:0 8px 22px -8px rgba(244,63,94,.55);background:rgba(244,63,94,.1)}
 .nav-link{position:relative}.nav-link::after{content:"";position:absolute;left:0;bottom:-4px;height:2px;width:100%;background:#f43f5e;transform:scaleX(0);transform-origin:left;transition:transform .3s}.nav-link:hover::after{transform:scaleX(1)}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .reveal{opacity:1;transform:none}}
+
+@keyframes shine{to{background-position:200% center}}
+@keyframes sweep{to{transform:translateX(220%) skewX(-20deg)}}
+@keyframes ping2{75%,100%{transform:scale(2.2);opacity:0}}
+.shine{background:linear-gradient(90deg,#fff 0%,#fff 35%,#fb7185 50%,#38bdf8 65%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent!important;animation:shine 6s linear infinite}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.spot{position:relative;overflow:hidden}
+.spot::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(244,63,94,.18),transparent 70%)}
+.spot:hover::before{opacity:1}
+.tilt{transition:transform .15s ease-out,border-color .3s;will-change:transform}
+.btn-shine{position:relative;overflow:hidden}
+.btn-shine::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:rgba(255,255,255,.35);transform:skewX(-20deg);animation:sweep 3.2s ease-in-out infinite}
+section h2{position:relative;display:inline-block}
+section h2::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:100%;background:linear-gradient(90deg,#e11d48,#3b82f6);transform:scaleX(0);transform-origin:left;transition:transform .8s cubic-bezier(.2,.7,.2,1) .2s}
+section h2.drawn::after{transform:scaleX(1)}
+.nav-link.active{color:#fff}.nav-link.active::after{transform:scaleX(1)}
+.dot{position:relative;display:inline-flex;height:8px;width:8px;border-radius:9999px;background:#34d399}
+.dot::after{content:"";position:absolute;inset:0;border-radius:9999px;background:#34d399;animation:ping2 1.8s cubic-bezier(0,0,.2,1) infinite}
+#totop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;height:44px;width:44px;border-radius:9999px;border:1px solid rgba(255,255,255,.15);background:rgba(10,12,16,.85);color:#fff;opacity:0;transform:translateY(20px) scale(.8);pointer-events:none;transition:opacity .3s,transform .3s}
+#totop.show{opacity:1;transform:none;pointer-events:auto}#totop:hover{border-color:#f43f5e}
+@media (prefers-reduced-motion:reduce){.blob,.ring,.photo-float,.btn-shine::after,.shine{animation:none!important}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
 <body class="text-slate-300 antialiased">
-<div id="progress"></div><div class="blob b1"></div><div class="blob b2"></div>
+<canvas id="fx"></canvas><div id="progress"></div><div class="blob b1"></div><div class="blob b2"></div>
 <header class="sticky top-0 z-20 border-b border-white/10 bg-[#0a0c10]/85 backdrop-blur">
 <nav class="mx-auto flex max-w-5xl items-center justify-between px-5 py-3">
 <a href="#top" class="font-mono text-sm font-semibold text-white">rafi<span class="text-rose-500">.</span>dev</a>
@@ -53,13 +80,13 @@ a[class*="rounded-lg"]{transition:transform .2s ease,background-color .2s,border
 <main id="top" class="glow">
 <section class="mx-auto flex max-w-5xl flex-col-reverse items-center gap-8 px-5 py-14 sm:py-20 md:flex-row md:justify-between">
 <div class="hero-in text-center md:text-left">
-<p class="font-mono text-sm text-sky-400">Halo, saya</p>
-<h1 class="mt-2 text-4xl font-bold tracking-tight text-white sm:text-5xl">Rafi’ Al Khawarizmi</h1>
-<p class="mt-3 text-lg text-slate-300">Junior <span class="text-rose-500">Backend</span> Developer</p>
+<p class="font-mono text-sm text-sky-400"><span class="dot mr-2 align-middle"></span>Halo, saya</p>
+<h1 class="shine mt-2 text-4xl font-bold tracking-tight text-white sm:text-5xl">Rafi’ Al Khawarizmi</h1>
+<p class="mt-3 text-lg text-slate-300">Junior <span class="text-rose-500">Full Stack</span> Developer</p>
 <p class="mt-2 h-6 font-mono text-sm text-sky-400">&gt; <span id="typed"></span><span class="cursor">▍</span></p>
-<p class="mt-4 max-w-xl text-slate-400">Mahasiswa S1 Rekayasa Perangkat Lunak, Telkom University Bandung. Fokus membangun API, basis data, dan arsitektur server yang rapi dan scalable.</p>
+<p class="mt-4 max-w-xl text-slate-400">Mahasiswa S1 Rekayasa Perangkat Lunak, Telkom University Bandung. Membangun aplikasi web dari ujung ke ujung: antarmuka frontend, API, basis data, dan arsitektur server yang rapi dan scalable.</p>
 <div class="mt-6 flex flex-wrap justify-center gap-3 md:justify-start">
-<a href="#proyek" class="rounded-lg bg-rose-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-rose-500">Lihat Proyek</a>
+<a href="#proyek" class="btn-shine rounded-lg bg-rose-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-rose-500">Lihat Proyek</a>
 <a href="https://github.com/alkuarium" target="_blank" rel="noopener" class="rounded-lg border border-white/20 px-5 py-2.5 text-sm font-medium text-white hover:border-sky-400">GitHub</a>
 <a href="#kontak" class="rounded-lg border border-white/20 px-5 py-2.5 text-sm font-medium text-white hover:border-sky-400">Hubungi Saya</a>
 </div></div>
@@ -70,9 +97,9 @@ a[class*="rounded-lg"]{transition:transform .2s ease,background-color .2s,border
 <section id="tentang" class="mx-auto max-w-5xl px-5 py-12">
 <h2 class="text-2xl font-bold text-white"><span class="text-rose-500">#</span> Tentang Saya</h2>
 <div class="mt-5 grid gap-6 md:grid-cols-2">
-<p class="leading-relaxed text-slate-400">Saya lulusan SMK Telkom Malang jurusan Rekayasa Perangkat Lunak dengan pendalaman web development, lebih fokus ke backend. Saya senang bekerja dengan API, database, dan arsitektur sistem, serta terus belajar teknologi baru dan terbuka untuk kolaborasi.</p>
+<p class="leading-relaxed text-slate-400">Saya lulusan SMK Telkom Malang jurusan Rekayasa Perangkat Lunak dengan pendalaman web development, mencakup frontend dan backend. Saya senang membangun antarmuka, API, database, dan arsitektur sistem, serta terus belajar teknologi baru dan terbuka untuk kolaborasi.</p>
 <div class="space-y-3">
-<div class="rounded-xl border border-white/10 bg-white/[0.03] p-4"><p class="text-xs uppercase tracking-wider text-sky-400">Sedang</p><p class="mt-1 text-sm text-slate-300">Mendalami arsitektur backend lanjutan, optimasi database, dan membangun proyek backend pribadi.</p></div>
+<div class="rounded-xl border border-white/10 bg-white/[0.03] p-4"><p class="text-xs uppercase tracking-wider text-sky-400">Sedang</p><p class="mt-1 text-sm text-slate-300">Mendalami arsitektur backend lanjutan, optimasi database, dan membangun proyek full stack pribadi.</p></div>
 <div class="rounded-xl border border-white/10 bg-white/[0.03] p-4"><p class="text-xs uppercase tracking-wider text-sky-400">Pendidikan</p>
 <p class="mt-1 text-sm text-white">Telkom University Bandung</p><p class="text-sm text-slate-400">S1 Rekayasa Perangkat Lunak (sekarang)</p>
 <p class="mt-2 text-sm text-white">SMK Telkom Malang</p><p class="text-sm text-slate-400">Rekayasa Perangkat Lunak</p></div>
@@ -83,7 +110,12 @@ a[class*="rounded-lg"]{transition:transform .2s ease,background-color .2s,border
 
 <section id="proyek" class="mx-auto max-w-5xl px-5 py-12">
 <h2 class="text-2xl font-bold text-white"><span class="text-rose-500">#</span> Proyek</h2>
-<p class="mt-2 text-slate-400">Pilihan repositori dari <a class="text-sky-400 hover:underline" href="https://github.com/alkuarium?tab=repositories" target="_blank" rel="noopener">GitHub</a>, berfokus pada backend, plus proyek full-stack.</p>
+<p class="mt-2 text-slate-400">Pilihan repositori dari <a class="text-sky-400 hover:underline" href="https://github.com/alkuarium?tab=repositories" target="_blank" rel="noopener">GitHub</a>, mencakup proyek backend dan full-stack.</p>
+<div id="gh-stats" class="mt-5 grid grid-cols-3 gap-3 text-center">
+<div class="spot rounded-xl border border-white/10 bg-white/[0.03] p-4"><p class="text-2xl font-bold text-white sm:text-3xl"><span data-count="22" data-key="public_repos">0</span></p><p class="text-xs text-slate-400">Repositori</p></div>
+<div class="spot rounded-xl border border-white/10 bg-white/[0.03] p-4"><p class="text-2xl font-bold text-white sm:text-3xl"><span data-count="7">0</span></p><p class="text-xs text-slate-400">Proyek pilihan</p></div>
+<div class="spot rounded-xl border border-white/10 bg-white/[0.03] p-4"><p class="text-2xl font-bold text-white sm:text-3xl"><span data-count="6" data-key="followers">0</span></p><p class="text-xs text-slate-400">Pengikut</p></div>
+</div>
 <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"><a href="https://github.com/alkuarium/Backend-simulasi-Kasir" target="_blank" rel="noopener" class="group flex flex-col rounded-xl border border-white/10 bg-white/[0.03] p-5 transition hover:-translate-y-1 hover:border-rose-500/60">
 <div class="flex items-center justify-between gap-2"><span class="text-xs font-medium text-rose-400 border-rose-500/40 border rounded-full px-2 py-0.5">Backend</span><span class="text-xs text-slate-500">JavaScript</span></div>
 <h3 class="mt-3 break-words font-mono text-base font-semibold text-white group-hover:text-rose-400">Backend-simulasi-Kasir</h3>
@@ -104,6 +136,14 @@ a[class*="rounded-lg"]{transition:transform .2s ease,background-color .2s,border
 <div class="flex items-center justify-between gap-2"><span class="text-xs font-medium text-sky-400 border-sky-500/40 border rounded-full px-2 py-0.5">Full-stack</span><span class="text-xs text-slate-500">TypeScript</span></div>
 <h3 class="mt-3 break-words font-mono text-base font-semibold text-white group-hover:text-rose-400">FE-BE_Web-Baca-buku</h3>
 <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-400">Web baca buku dengan frontend dan backend.</p>
+<span class="mt-4 text-sm text-sky-400">Lihat di GitHub →</span></a><a href="https://github.com/alkuarium/mt5.bot_test" target="_blank" rel="noopener" class="group flex flex-col rounded-xl border border-white/10 bg-white/[0.03] p-5 transition hover:-translate-y-1 hover:border-rose-500/60">
+<div class="flex items-center justify-between gap-2"><span class="text-xs font-medium text-amber-400 border-amber-500/40 border rounded-full px-2 py-0.5">Eksperimen</span><span class="text-xs text-slate-500">MQL5</span></div>
+<h3 class="mt-3 break-words font-mono text-base font-semibold text-white group-hover:text-rose-400">mt5.bot_test</h3>
+<p class="mt-2 flex-1 text-sm leading-relaxed text-slate-400">Percobaan bot untuk MetaTrader 5 menggunakan MQL5.</p>
+<span class="mt-4 text-sm text-sky-400">Lihat di GitHub →</span></a><a href="https://github.com/alkuarium/golang-test-bljr" target="_blank" rel="noopener" class="group flex flex-col rounded-xl border border-white/10 bg-white/[0.03] p-5 transition hover:-translate-y-1 hover:border-rose-500/60">
+<div class="flex items-center justify-between gap-2"><span class="text-xs font-medium text-emerald-400 border-emerald-500/40 border rounded-full px-2 py-0.5">Belajar</span><span class="text-xs text-slate-500">Go</span></div>
+<h3 class="mt-3 break-words font-mono text-base font-semibold text-white group-hover:text-rose-400">golang-test-bljr</h3>
+<p class="mt-2 flex-1 text-sm leading-relaxed text-slate-400">Latihan dasar Go: struct, slice, perulangan, dan unit test, tersusun per modul praktik.</p>
 <span class="mt-4 text-sm text-sky-400">Lihat di GitHub →</span></a></div>
 </section>
 
@@ -130,9 +170,9 @@ a[class*="rounded-lg"]{transition:transform .2s ease,background-color .2s,border
 <section id="kontak" class="mx-auto max-w-5xl px-5 py-12">
 <div class="rounded-2xl border border-white/10 bg-gradient-to-br from-rose-600/10 to-sky-500/10 p-8 text-center">
 <h2 class="text-2xl font-bold text-white">Mari berkolaborasi</h2>
-<p class="mt-2 text-slate-400">Terbuka untuk magang, proyek, dan kesempatan kerja di bidang backend.</p>
+<p class="mt-2 text-slate-400">Terbuka untuk pekerjaan full time, kerja kontrak, dan proyek di bidang full stack.</p>
 <div class="mt-6 flex flex-wrap justify-center gap-3">
-<a href="mailto:rafialkhawarizmi321@gmail.com" class="rounded-lg bg-rose-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-rose-500">Email</a>
+<a href="mailto:rafialkhawarizmi321@gmail.com" class="btn-shine rounded-lg bg-rose-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-rose-500">Email</a>
 <a href="https://www.linkedin.com/in/rafi-al-khawarizmi-2866b3329/" target="_blank" rel="noopener" class="rounded-lg border border-white/20 px-5 py-2.5 text-sm font-medium text-white hover:border-sky-400">LinkedIn</a>
 <a href="https://github.com/alkuarium" target="_blank" rel="noopener" class="rounded-lg border border-white/20 px-5 py-2.5 text-sm font-medium text-white hover:border-sky-400">GitHub</a>
 </div>
@@ -143,16 +183,61 @@ a[class*="rounded-lg"]{transition:transform .2s ease,background-color .2s,border
 <script>
 (function(){
 var rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
-var phrases=["membangun REST API","mengoptimalkan database","merancang arsitektur backend","belajar terus setiap hari"];
+var phrases=["membangun aplikasi full stack","merancang antarmuka dengan Next.js","membangun REST API","mengoptimalkan database","belajar terus setiap hari"];
 var el=document.getElementById("typed");
-if(rm){el.textContent=phrases[0]}else{var p=0,c=0,del=false;(function tick(){var w=phrases[p];c+=del?-1:1;el.textContent=w.slice(0,c);var d=del?35:75;if(!del&&c===w.length){del=true;d=1400}else if(del&&c===0){del=false;p=(p+1)%phrases.length;d=350}setTimeout(tick,d)})()}
-var sel="section h2,#proyek>p,#tentang .grid>*,#tentang h3,#tentang .flex-wrap>span,#proyek .grid>a,#pengalaman article,#kontak>div";
+{var p=0,c=0,del=false;(function tick(){var w=phrases[p];c+=del?-1:1;el.textContent=w.slice(0,c);var d=del?35:75;if(!del&&c===w.length){del=true;d=1400}else if(del&&c===0){del=false;p=(p+1)%phrases.length;d=350}setTimeout(tick,d)})()}
+var sel="section h2,#proyek>p,#tentang .grid>*,#tentang h3,#tentang .flex-wrap>span,#gh-stats>div,#proyek .grid>a,#pengalaman article,#kontak>div,footer";
 var items=document.querySelectorAll(sel);
-items.forEach(function(n){n.classList.add("reveal");var i=Array.prototype.indexOf.call(n.parentNode.children,n);n.style.transitionDelay=Math.min(i*70,500)+"ms"});
-if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var t=e.target;t.classList.add("in");io.unobserve(t);setTimeout(function(){t.classList.remove("reveal","in");t.style.transitionDelay=""},1300)}})},{threshold:.12,rootMargin:"0px 0px -40px 0px"});items.forEach(function(n){io.observe(n)})}else{items.forEach(function(n){n.classList.add("in")})}
+items.forEach(function(n){var i=Array.prototype.indexOf.call(n.parentNode.children,n);n.classList.add("reveal");
+var cl=n.matches("h2,#tentang .grid>*")?(i%2?"from-r":"from-l"):n.matches("#proyek .grid>a,#gh-stats>div,#kontak>div,#tentang .flex-wrap>span")?"zoom":"";
+if(cl)n.classList.add(cl);
+n.style.setProperty("--d",Math.min(i*(n.matches("span")?45:90),600)+"ms")});
+if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle("in",e.isIntersecting)})},{threshold:.1,rootMargin:"0px 0px -8% 0px"});items.forEach(function(n){io.observe(n)})}else{items.forEach(function(n){n.classList.add("in")})}
 var bar=document.getElementById("progress");
 function sp(){var m=document.documentElement.scrollHeight-innerHeight;bar.style.transform="scaleX("+(m>0?scrollY/m:0)+")"}
 addEventListener("scroll",sp,{passive:true});sp();
+})();
+</script>
+<button id="totop" aria-label="Kembali ke atas">↑</button>
+<script>
+(function(){
+var rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+var $=function(q){return document.querySelectorAll(q)};
+$("#proyek .grid>a,#gh-stats>div,#pengalaman article,#tentang .grid>div>div").forEach(function(c){c.classList.add("spot");
+c.addEventListener("pointermove",function(e){var r=c.getBoundingClientRect();c.style.setProperty("--mx",e.clientX-r.left+"px");c.style.setProperty("--my",e.clientY-r.top+"px")})});
+var fine=!rm&&matchMedia("(pointer:fine)").matches;
+if(fine){
+$("#proyek .grid>a").forEach(function(c){c.classList.add("tilt");
+c.addEventListener("pointermove",function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform="perspective(700px) rotateX("+(-y*8).toFixed(2)+"deg) rotateY("+(x*8).toFixed(2)+"deg) translateY(-4px)"});
+c.addEventListener("pointerleave",function(){c.style.transform=""})});
+$("a[class*=rounded-lg]").forEach(function(b){
+b.addEventListener("pointermove",function(e){var r=b.getBoundingClientRect();b.style.transform="translate("+((e.clientX-r.left-r.width/2)*.2).toFixed(1)+"px,"+((e.clientY-r.top-r.height/2)*.3-2).toFixed(1)+"px)"});
+b.addEventListener("pointerleave",function(){b.style.transform=""})})}
+var secs=["tentang","proyek","pengalaman","kontak"].map(function(id){return document.getElementById(id)}),links=$(".nav-link");
+var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.toggle("active",l.getAttribute("href")==="#"+e.target.id)})}})},{rootMargin:"-40% 0px -55% 0px"});
+secs.forEach(function(x){so.observe(x)});
+var ho=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle("drawn",e.isIntersecting)})},{threshold:.6});
+$("section h2").forEach(function(h){ho.observe(h)});
+var spans=$("[data-count]"),ready=Promise.race([fetch("https://api.github.com/users/alkuarium").then(function(r){return r.ok?r.json():{}}).then(function(d){spans.forEach(function(n){var k=n.dataset.key;if(k&&d[k]!=null)n.dataset.count=d[k]})}),new Promise(function(r){setTimeout(r,1500)})]).catch(function(){});
+function count(n){var t=+n.dataset.count,s=performance.now();(function f(now){var k=Math.min((now-s)/1200,1),e=1-Math.pow(1-k,3);n.textContent=Math.round(t*e);if(k<1)requestAnimationFrame(f)})(s)}
+var co=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){ready.then(function(){count(e.target)})}else{e.target.textContent="0"}})},{threshold:.5});
+spans.forEach(function(n){co.observe(n)});
+var tt=document.getElementById("totop");
+addEventListener("scroll",function(){tt.classList.toggle("show",scrollY>600)},{passive:true});
+tt.addEventListener("click",function(){scrollTo({top:0,behavior:"smooth"})});
+var cv=document.getElementById("fx"),cx=cv.getContext("2d"),W,H,pts=[],mx=-999,my=-999,run=true;
+function size(){var d=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);var n=Math.round(Math.min(70,W*H/20000));pts=[];for(var i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35})}
+if(rm){cv.style.display="none";return}
+size();addEventListener("resize",size);
+addEventListener("pointermove",function(e){mx=e.clientX;my=e.clientY},{passive:true});
+document.addEventListener("visibilitychange",function(){run=!document.hidden;if(run)draw()});
+function draw(){if(!run)return;cx.clearRect(0,0,W,H);
+for(var i=0;i<pts.length;i++){var a=pts[i];a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
+cx.fillStyle="rgba(148,163,184,.55)";cx.beginPath();cx.arc(a.x,a.y,1.4,0,6.283);cx.fill();
+for(var j=i+1;j<pts.length;j++){var b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=dx*dx+dy*dy;if(d<14400){cx.strokeStyle="rgba(99,130,200,"+(.16*(1-d/14400)).toFixed(3)+")";cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()}}
+var mdx=a.x-mx,mdy=a.y-my,md=mdx*mdx+mdy*mdy;if(md<22500){cx.strokeStyle="rgba(244,63,94,"+(.4*(1-md/22500)).toFixed(3)+")";cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(mx,my);cx.stroke()}}
+requestAnimationFrame(draw)}
+draw();
 })();
 </script>
 </body></html>
